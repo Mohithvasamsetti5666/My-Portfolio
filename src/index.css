@@ -1,0 +1,282 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222.2 47.4% 11.2%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 47.4% 11.2%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 47.4% 11.2%;
+    --primary: 221.2 83% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+  html {
+    @apply scroll-smooth;
+  }
+  
+  /* Improved heading styles with glow/underline effect */
+  h2.glow-text {
+    @apply relative inline-block;
+  }
+  
+  /* Light theme glow */
+  h2.glow-text::after {
+    @apply content-[''] absolute w-0 h-1 bg-blue-600 dark:bg-blue-400 left-1/2 -bottom-2 transform -translate-x-1/2 transition-all duration-500;
+    box-shadow: 0 0 8px 2px theme('colors.blue.400 / 30%');
+  }
+
+  /* Dark theme glow */
+  .dark h2.glow-text::after {
+    box-shadow: 0 0 8px 2px theme('colors.blue.500 / 50%');
+  }
+  
+  h2.glow-text:hover::after,
+  section:hover h2.glow-text::after {
+    @apply w-1/2;
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    h2.glow-text::after {
+      animation: glow-underline 3s ease-in-out infinite;
+    }
+  }
+  
+  /* Better animation for section transitions */
+  section {
+    @apply relative overflow-hidden;
+    transition: background-color 0.5s ease-in-out;
+  }
+  
+  section::before {
+    @apply absolute inset-0 opacity-0;
+    content: '';
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+  /* Red team glow effect - Light/Dark compatible */
+  .red-team-glow {
+    box-shadow: 0 0 15px 5px rgba(239, 68, 68, 0.15);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  
+  .red-team-glow:hover {
+    box-shadow: 0 0 20px 8px rgba(239, 68, 68, 0.25);
+  }
+  
+  /* Blue team glow effect - Light/Dark compatible */
+  .blue-team-glow {
+    box-shadow: 0 0 15px 5px rgba(59, 130, 246, 0.15);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  
+  .blue-team-glow:hover {
+    box-shadow: 0 0 20px 8px rgba(59, 130, 246, 0.25);
+  }
+
+  /* Section heading animations */
+  section h2 {
+    @apply relative inline-block;
+  }
+  
+  section h2::after {
+    content: '';
+    @apply absolute left-0 bottom-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-red-500 dark:from-blue-400 dark:to-red-400;
+    transition: width 0.8s ease-out;
+  }
+  
+  section:hover h2::after,
+  section.in-view h2::after {
+    @apply w-full;
+  }
+}
+
+@layer utilities {
+  /* Enhanced fade-in animation */
+  .animate-fade-in {
+    @apply opacity-0 translate-y-4;
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+
+  /* Enhanced scale-in animation */
+  .animate-scale-in {
+    @apply opacity-0 scale-95;
+    animation: scaleIn 0.5s ease-out forwards;
+  }
+  
+  /* New pulse glow animation */
+  .animate-pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+  
+  /* New border glow effect */
+  .border-glow {
+    @apply relative;
+  }
+  
+  .border-glow::after {
+    content: '';
+    @apply absolute inset-0 rounded-full;
+    box-shadow: 0 0 15px 3px theme('colors.blue.400 / 30%');
+    animation: borderGlow 2s ease-in-out infinite;
+  }
+  
+  /* Custom gradient text for sections - Light/Dark compatible */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(90deg, theme('colors.blue.800'), theme('colors.blue.600'));
+  }
+  
+  .dark .gradient-text {
+    background-image: linear-gradient(90deg, theme('colors.blue.400'), theme('colors.blue.300'));
+  }
+
+  /* Light theme specific styles */
+  .light-theme-heading {
+    @apply text-gray-900;
+  }
+  
+  .light-theme-card {
+    @apply bg-white/80 border-gray-200 text-gray-800;
+  }
+  
+  /* Dark theme specific styles */
+  .dark-theme-heading {
+    @apply text-blue-400;
+  }
+  
+  .dark-theme-card {
+    @apply bg-gray-800/50 border-blue-900/30 text-gray-200;
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes glow-underline {
+  0% {
+    width: 0%;
+    opacity: 0.5;
+  }
+  50% {
+    width: 70%;
+    opacity: 1;
+  }
+  100% {
+    width: 0%;
+    opacity: 0.5;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.6;
+    filter: blur(5px);
+  }
+  50% {
+    opacity: 1;
+    filter: blur(10px);
+  }
+}
+
+@keyframes borderGlow {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@layer components {
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-700 to-blue-500 dark:from-blue-300 dark:to-blue-500;
+  }
+
+  .animate-fade-in {
+    @apply opacity-0 translate-y-4 animate-[fadeIn_0.6s_ease-out_forwards];
+  }
+
+  .animate-scale-in {
+    @apply opacity-0 scale-95 animate-[scaleIn_0.5s_ease-out_forwards];
+  }
+
+  /* Card styles for light/dark theme */
+  .card-light {
+    @apply bg-white/80 border-gray-200 text-gray-800 shadow-md;
+  }
+  
+  .card-dark {
+    @apply bg-gray-800/50 border-blue-900/30 text-gray-200 shadow-lg shadow-blue-900/5;
+  }
+  
+  /* Red/Blue team specific styles */
+  .red-team-badge {
+    @apply bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-200 border border-red-200 dark:border-red-800/30;
+  }
+  
+  .blue-team-badge {
+    @apply bg-blue-50 dark:bg-blue-900/20 text-blue-800 dark:text-blue-200 border border-blue-200 dark:border-blue-800/30;
+  }
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+}
