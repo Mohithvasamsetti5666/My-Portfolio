@@ -15,11 +15,16 @@ import MatrixRain from "../components/matrix-rain";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#0B0B1E] text-gray-900 dark:text-gray-100 overflow-x-hidden">
-      <div className="fixed inset-0 bg-gradient-to-br from-blue-100/50 via-transparent to-red-100/50 dark:from-blue-900/20 dark:via-transparent dark:to-red-900/20" />
-      <div className="fixed inset-0 bg-[url('/lovable-uploads/68e07a39-0361-4460-b397-03d9694d7a08.png')] bg-cover bg-center opacity-10 dark:opacity-30 mix-blend-overlay" />
-      <MatrixRain />
+    <div className="relative min-h-screen bg-black dark:bg-black text-gray-900 dark:text-gray-100 overflow-x-hidden">
       
+      {/* Matrix Rain Background */}
+      <MatrixRain />
+
+      {/* Optional soft background gradients */}
+      <div className="fixed inset-0 bg-gradient-to-br from-blue-100/30 via-transparent to-red-100/30 dark:from-blue-900/20 dark:via-transparent dark:to-red-900/20 pointer-events-none" />
+      <div className="fixed inset-0 bg-[url('/lovable-uploads/68e07a39-0361-4460-b397-03d9694d7a08.png')] bg-cover bg-center opacity-5 dark:opacity-10 mix-blend-overlay pointer-events-none" />
+      
+      {/* Main Content Above Matrix */}
       <div className="relative z-10">
         <Header />
         <main className="space-y-20 [&>section]:scroll-mt-16">
@@ -36,6 +41,9 @@ const Index = () => {
         <Footer />
         <ScrollToTop />
       </div>
+
+      {/* Optional Theme Toggle Button */}
+      <ThemeToggle />
     </div>
   );
 };
