@@ -24,7 +24,7 @@ const About = () => {
                 <div className="flex flex-col items-center text-center p-4 bg-gray-800/70 rounded-lg border border-blue-900/20">
                   <Shield className="h-8 w-8 text-blue-400 mb-2" />
                   <h3 className="font-semibold mb-1 text-blue-300">Security Expert</h3>
-                  <p className="text-sm text-gray-300">Proficient in Splunk, Wireshark, Kali Linux, Nmap, Metasploit</p>
+                  <p className="text-sm text-gray-300">Proficient in Splunk, Wireshark, Burp Suite, Kali Linux, Nmap, Metasploit</p>
                 </div>
                 <div className="flex flex-col items-center text-center p-4 bg-gray-800/70 rounded-lg border border-blue-900/20">
                   <Terminal className="h-8 w-8 text-blue-400 mb-2" />
