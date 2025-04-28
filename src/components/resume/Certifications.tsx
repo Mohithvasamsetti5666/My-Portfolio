@@ -7,8 +7,7 @@ const Certifications = () => {
   return (
     <section id="certifications" className="py-20 relative bg-gray-50/70 dark:bg-gray-900/50 backdrop-blur">
       <div className="absolute inset-0 bg-gradient-to-br from-blue-900/5 via-transparent to-red-900/5 dark:from-blue-900/10 dark:via-transparent dark:to-red-900/10" />
-      <MatrixRain />
-      
+            
       <div className="container relative mx-auto px-4 md:px-6 z-10">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900 dark:text-blue-400 animate-fade-in glow-text">
           Professional Certifications
