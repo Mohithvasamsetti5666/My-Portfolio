@@ -1,11 +1,10 @@
-
 import { useEffect, useRef } from 'react';
-import { useTheme } from "@/components/theme-provider";
+import { useTheme } from "@/components/theme-provider"; // Assuming you have a dark/light theme switch
 
 const MatrixRain = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const { theme } = useTheme();
-  
+  const { theme } = useTheme(); // You are switching between light and dark
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -13,70 +12,72 @@ const MatrixRain = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
 
-    const fontSize = 16; // Increased font size for better visibility
-    const columns = Math.floor(canvas.width / fontSize);
-    
-    const drops: number[] = Array(columns).fill(1);
-    
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789$+-*/=%"\'#&_(),.;:?!\\|{}<>[]^~';
-    
+    const fontSize = 16; // Good for mobile and desktop
+    const columns = Math.floor(width / fontSize);
+    const drops = Array(columns).fill(1);
+
+    const characters = '01'; // Minimal for Matrix effect (can add more if you want)
+
     const createGradient = () => {
-      const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      const gradient = ctx.createLinearGradient(0, 0, width, height);
       if (theme === 'light') {
-        gradient.addColorStop(0, 'rgba(0, 100, 0, 0.6)'); // Increased opacity
-        gradient.addColorStop(1, 'rgba(0, 130, 0, 0.8)'); // Increased opacity
+        gradient.addColorStop(0, 'rgba(0, 100, 0, 0.7)');
+        gradient.addColorStop(1, 'rgba(0, 150, 0, 0.8)');
       } else {
-        gradient.addColorStop(0, 'rgba(0, 255, 100, 0.5)'); // Increased opacity
-        gradient.addColorStop(1, 'rgba(20, 230, 80, 0.7)'); // Increased opacity
+        gradient.addColorStop(0, 'rgba(0, 255, 0, 0.7)');
+        gradient.addColorStop(1, 'rgba(0, 200, 0, 0.9)');
       }
       return gradient;
     };
-    
+
     const draw = () => {
-      // Reduced opacity of background fill
-      if (theme === 'light') {
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
-      } else {
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.02)';
-      }
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      
+      // Background fading
+      ctx.fillStyle = theme === 'light'
+        ? 'rgba(255, 255, 255, 0.1)'
+        : 'rgba(0, 0, 0, 0.1)';
+      ctx.fillRect(0, 0, width, height);
+
       ctx.fillStyle = createGradient();
       ctx.font = `${fontSize}px monospace`;
-      
+
       for (let i = 0; i < drops.length; i++) {
         const text = characters.charAt(Math.floor(Math.random() * characters.length));
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-        
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+
+        if (drops[i] * fontSize > height && Math.random() > 0.975) {
           drops[i] = 0;
         }
         drops[i]++;
       }
     };
-    
-    const intervalId = setInterval(draw, 35); // Slightly reduced interval for smoother animation
-    
+
+    const intervalId = setInterval(draw, 30); // Smooth 30ms for mobile and desktop
+
     const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      const newColumns = Math.floor(canvas.width / fontSize);
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+      const newColumns = Math.floor(width / fontSize);
       drops.length = newColumns;
-      drops.fill(1, columns);
+      drops.fill(1, 0, newColumns); // Properly fill after resize
     };
-    
+
     window.addEventListener('resize', handleResize);
-    
+
     return () => {
       clearInterval(intervalId);
       window.removeEventListener('resize', handleResize);
     };
   }, [theme]);
 
-  const opacityClass = theme === 'light' ? 'opacity-20' : 'opacity-15';
+  // Adjust background faint opacity based on theme
+  const opacityClass = theme === 'light' ? 'opacity-20' : 'opacity-10';
 
   return (
     <canvas
