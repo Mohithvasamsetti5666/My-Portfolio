@@ -39,7 +39,8 @@ const Index = () => {
         </main>
         <Footer />
         <ScrollToTop />
-     
+      </div> {/* <-- ✅ Closing this inner div */}
+      </div>     {/* <-- ✅ Closing main wrapper */}
   );
 };
 
