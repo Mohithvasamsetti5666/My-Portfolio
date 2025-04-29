@@ -10,7 +10,7 @@ This portfolio is a living canvas of my work, crafted to showcase creativity, pr
 
 ## 🔗 Live Preview
 
-🌟 [View the Full Website Here](https://preview-e9de4ce7--mohith-portfolio.lovable.app/#hero)
+🌟 [View the Full Website Here](https://mohithcyberportfolio.netlify.app/)
 
 ---
 
