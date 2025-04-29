@@ -10,7 +10,7 @@ import Education from "../components/resume/Education";
 import Contact from "../components/resume/Contact";
 import Footer from "../components/resume/Footer";
 import { ScrollToTop } from "../components/scroll-to-top";
-import { ThemeToggle } from "../components/theme-toggle";
+
 import MatrixRain from "../components/matrix-rain";
 
 const Index = () => {
@@ -40,11 +40,7 @@ const Index = () => {
         </main>
         <Footer />
         <ScrollToTop />
-      </div>
-
-      {/* Optional Theme Toggle Button */}
-      <ThemeToggle />
-    </div>
+     
   );
 };
 
