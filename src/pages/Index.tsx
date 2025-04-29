@@ -10,7 +10,6 @@ import Education from "../components/resume/Education";
 import Contact from "../components/resume/Contact";
 import Footer from "../components/resume/Footer";
 import { ScrollToTop } from "../components/scroll-to-top";
-
 import MatrixRain from "../components/matrix-rain";
 
 const Index = () => {
